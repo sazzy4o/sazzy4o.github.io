@@ -10,7 +10,8 @@ fetch("http://192.168.1.78:9200/twitter/0/1", {
   },
   "body": {
     "test": "test0"
-  }
+  },
+  "mode": "no-cors"
 })
 .then(response => {
   console.log(response);
