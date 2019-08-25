@@ -3,9 +3,12 @@
 </head>
 <body>
 <script> 
-fetch("http://192.168.1.78:8000/", {
+fetch("http://192.168.1.78:9200/twitter/0/2", {
   "method": "POST",
-  "headers": {},
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": "{\"test\":\"test1\"}",
   "mode": "no-cors"
 })
 .then(response => {
