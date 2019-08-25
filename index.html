@@ -2,5 +2,17 @@
   <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
 </head>
 <body>
- <iframe src="http://192.168.1.254/"/>
+<script> 
+fetch("http://192.168.1.254/", {
+  "method": "GET",
+  "headers": {},
+  "mode": "no-cors"
+})
+.then(response => {
+  console.log(response);
+})
+.catch(err => {
+  console.log(err);
+});
+</script>
 </body>
