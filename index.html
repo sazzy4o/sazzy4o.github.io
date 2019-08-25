@@ -3,10 +3,10 @@
 </head>
 <body>
 <script> 
-let sock0 = new WebSocket('ws://localhost:19002/graphql');
+let sock = new WebSocket('ws://localhost:19002/graphql');
 sock.onmessage = (e) => {
   console.log(e);
 };
-sock0.sent("Test");
+sock.sent("Test");
 </script>
 </body>
