@@ -3,10 +3,29 @@
 </head>
 <body>
 <script> 
-let sock = new WebSocket('ws://localhost:19002/graphql');
-sock.onmessage = (e) => {
-  console.log(e);
-};
-sock.sent("Test");
+
+                    let client = new WebSockets('ws://localhost:19002/graphql',"graphql-ws");
+                    client.onopen = function() {
+                        var t = {};
+                        var t = '{"type":"connection_init","payload":{}}';
+                        try {
+                            JSON.parse(t)
+                        } catch (t) {
+                            throw new Error("Message must be JSON-serializable. Got: " + e)
+                        }
+                        client.send(t);
+                    };
+                    client.onclose = function() {
+                        e.closedByUser || e.close(false, false)
+                    }
+                    ;
+                    client.onerror = function(t) {
+                        e.eventEmitter.emit("error", t)
+                    }
+                    ;
+                    client.onmessage = function(t) {
+                        var r = t.data;
+                        console.log(r);
+                    }
 </script>
 </body>
