@@ -4,7 +4,7 @@
 <body>
 <script> 
 
-                    let client = new WebSockets('ws://localhost:19002/graphql',"graphql-ws");
+                    let client = new WebSocket('ws://localhost:19002/graphql',"graphql-ws");
                     client.onopen = function() {
                         var t = {};
                         var t = '{"type":"connection_init","payload":{}}';
