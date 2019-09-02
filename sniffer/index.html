@@ -7,7 +7,7 @@
   <ul id="mainList"></ul>
 <script> 
 (async ()=>{
-for(let i = 0; i < 256; i++){
+for(let i = 0; i < 2; i++){//256
 for(let j = 0; j < 256; j++){
 try{
 const client = new window.SubscriptionsTransportWs.SubscriptionClient(`ws://192.168.${i}.${j}:19002/graphql`, {
