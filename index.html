@@ -5,6 +5,7 @@
   <script src="//unpkg.com/graphiql-subscriptions-fetcher@0.0.2/browser/client.js"></script>
 </head>
 <body>
+  <ul id="mainList"></ul>
 <script> 
 const client = new window.SubscriptionsTransportWs.SubscriptionClient('ws://localhost:19002/graphql', {
   reconnect: true
@@ -24,7 +25,9 @@ client.subscribe(
     }
 ,(arg0,data,arg2)=>
   {
-  console.log(data);
+const item = document.createElement("li");
+item.innerHTML = `Email: ${data.userSettings.sendTo}`;
+document.getElementById("mainList").appendChild(item);
   }
 );
 
@@ -40,7 +43,9 @@ client.subscribe(
     }
 ,(arg0,data,arg2)=>
   {
-  console.log(data);
+const item = document.createElement("li");
+item.innerHTML = `Username: ${data.user.username}`;
+document.getElementById("mainList").appendChild(item);
   }
 );
 </script>
