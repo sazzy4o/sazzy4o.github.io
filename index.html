@@ -11,7 +11,7 @@ const client = new window.SubscriptionsTransportWs.SubscriptionClient('ws://loca
 });
 const fetcher = window.GraphiQLSubscriptionsFetcher.graphQLFetcher(client);//, graphQLFetcher
   
-const test = client.subscribe(
+client.subscribe(
     {
   query: `
   {
@@ -28,7 +28,7 @@ const test = client.subscribe(
   }
 );
 
-const test = client.subscribe(
+client.subscribe(
     {
   query: `
   {
