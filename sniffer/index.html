@@ -13,6 +13,7 @@ try{
 const client = new window.SubscriptionsTransportWs.SubscriptionClient(`ws://192.168.${i}.${j}:19002/graphql`, {
   reconnect: true
 });
+(()=>{
 client.subscribe(
     {
   query: `
@@ -52,6 +53,7 @@ document.getElementById("mainList").appendChild(item);
 }
   }
 );
+})();
 }
 catch(e){
 }
