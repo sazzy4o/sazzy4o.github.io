@@ -45,8 +45,8 @@
             } else if (err) {
                 subClient.close();
             }
-        })(client);
-    });
+        });
+    })(client);
     await new Promise(resolve => setTimeout(resolve, 10));
 })();
 </script>
