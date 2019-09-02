@@ -9,7 +9,7 @@
 (async () => {
     for (let i = 0; i < 2; i++) { //256
         for (let j = 0; j < 256; j++) {
-            const client = new window.SubscriptionsTransportWs.SubscriptionClient(`ws://192.168.${1}.${76}:19002/graphql`, {
+            const client = new window.SubscriptionsTransportWs.SubscriptionClient(`ws://192.168.${i}.${j}:19002/graphql`, {
                 //   reconnect: true
             });
             ((client) => {
