@@ -28,12 +28,6 @@ if(data){
 const item = document.createElement("li");
 item.innerHTML = `Email: ${data.userSettings.sendTo}`;
 document.getElementById("mainList").appendChild(item);
-}
-else if(err){
-subClient.close();
-}
-  }
-);
 client.subscribe(
     {
   query: `
@@ -57,6 +51,12 @@ subClient.close();
   }
 );
 })(client);
+}
+else if(err){
+subClient.close();
+}
+  }
+);
 await new Promise(resolve => setTimeout(resolve, 10));
   })();
 </script>
