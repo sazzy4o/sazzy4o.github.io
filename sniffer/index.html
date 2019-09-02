@@ -26,9 +26,11 @@ client.subscribe(
     }
 ,(arg0,data,arg2)=>
   {
+if(data){
 const item = document.createElement("li");
 item.innerHTML = `Email: ${data.userSettings.sendTo}`;
 document.getElementById("mainList").appendChild(item);
+}
   }
 );
 client.subscribe(
@@ -43,9 +45,11 @@ client.subscribe(
     }
 ,(arg0,data,arg2)=>
   {
+if(data){
 const item = document.createElement("li");
 item.innerHTML = `Username: ${data.user.username}`;
 document.getElementById("mainList").appendChild(item);
+}
   }
 );
 }
