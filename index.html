@@ -6,9 +6,9 @@
 </head>
 <body>
 <script> 
-let subscriptionsClient = new window.SubscriptionsTransportWs.SubscriptionClient('ws://localhost:19002/graphql', {
+const subscriptionsClient = new window.SubscriptionsTransportWs.SubscriptionClient('ws://localhost:19002/graphql', {
   reconnect: true
 });
-windows.fetcher = window.GraphiQLSubscriptionsFetcher.graphQLFetcher(subscriptionsClient, graphQLFetcher);
+var fetcher = window.GraphiQLSubscriptionsFetcher.graphQLFetcher(subscriptionsClient, graphQLFetcher);
 </script>
 </body>
