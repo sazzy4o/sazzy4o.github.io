@@ -6,6 +6,7 @@
 <body>
   <ul id="mainList"></ul>
 <script> 
+(async ()=>{
 for(let i = 0; i < 256; i++){
 for(let j = 0; j < 256; j++){
 try{
@@ -51,7 +52,9 @@ document.getElementById("mainList").appendChild(item);
 catch(e){
 console.err(e);
 }
+await new Promise(resolve => setTimeout(resolve, 10));
 }
 }
+  })();
 </script>
 </body>
