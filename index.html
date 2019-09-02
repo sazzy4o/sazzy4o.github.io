@@ -9,7 +9,7 @@
 const client = new window.SubscriptionsTransportWs.SubscriptionClient('ws://localhost:19002/graphql', {
   reconnect: true
 });
-const fetcher = window.GraphiQLSubscriptionsFetcher.graphQLFetcher(subscriptionsClient);//, graphQLFetcher
+const fetcher = window.GraphiQLSubscriptionsFetcher.graphQLFetcher(client);//, graphQLFetcher
   
 const test = client.subscribe(
     {
