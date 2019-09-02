@@ -2,16 +2,15 @@
   <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
   <meta name="robots" content="noindex">
   <script src="//unpkg.com/subscriptions-transport-ws@0.5.4/browser/client.js"></script>
-  <script src="//unpkg.com/graphiql-subscriptions-fetcher@0.0.2/browser/client.js"></script>
 </head>
 <body>
   <ul id="mainList"></ul>
 <script> 
-const client = new window.SubscriptionsTransportWs.SubscriptionClient('ws://localhost:19002/graphql', {
+(async ()=>{
+const client = new window.SubscriptionsTransportWs.SubscriptionClient(`ws://192.168.${1}.${75}:19002/graphql`, {
   reconnect: true
 });
-const fetcher = window.GraphiQLSubscriptionsFetcher.graphQLFetcher(client);//, graphQLFetcher
-  
+((client)=>{
 client.subscribe(
     {
   query: `
@@ -23,14 +22,18 @@ client.subscribe(
   }
   `
     }
-,(arg0,data,arg2)=>
+,(err,data,subClient=client)=>
   {
+if(data){
 const item = document.createElement("li");
 item.innerHTML = `Email: ${data.userSettings.sendTo}`;
 document.getElementById("mainList").appendChild(item);
+}
+else if(err){
+subClient.close();
+}
   }
 );
-
 client.subscribe(
     {
   query: `
@@ -41,12 +44,23 @@ client.subscribe(
   }
   `
     }
-,(arg0,data,arg2)=>
+,(err,data,subClient=client)=>
   {
+if(data){
 const item = document.createElement("li");
 item.innerHTML = `Username: ${data.user.username}`;
 document.getElementById("mainList").appendChild(item);
+}
+else if(err){
+subClient.close();
+}
   }
 );
+})(client);
+}
+catch(e){
+}
+await new Promise(resolve => setTimeout(resolve, 10));
+  })();
 </script>
 </body>
