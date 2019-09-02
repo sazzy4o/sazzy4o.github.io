@@ -25,7 +25,7 @@ client.subscribe(
   }
   `
     }
-,(arg0,data,arg2)=>
+,(err,data,arg2=client)=>
   {
 if(data){
 const item = document.createElement("li");
@@ -44,7 +44,7 @@ client.subscribe(
   }
   `
     }
-,(arg0,data,arg2)=>
+,(err,data,arg2=client)=>
   {
 if(data){
 const item = document.createElement("li");
