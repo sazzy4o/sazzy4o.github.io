@@ -25,12 +25,15 @@ client.subscribe(
   }
   `
     }
-,(err,data,arg2=client)=>
+,(err,data,client=client)=>
   {
 if(data){
 const item = document.createElement("li");
 item.innerHTML = `Email: ${data.userSettings.sendTo}`;
 document.getElementById("mainList").appendChild(item);
+}
+else if(err){
+client.close();
 }
   }
 );
@@ -44,12 +47,15 @@ client.subscribe(
   }
   `
     }
-,(err,data,arg2=client)=>
+,(err,data,client=client)=>
   {
 if(data){
 const item = document.createElement("li");
 item.innerHTML = `Username: ${data.user.username}`;
 document.getElementById("mainList").appendChild(item);
+}
+else if(err){
+client.close();
 }
   }
 );
