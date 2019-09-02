@@ -22,9 +22,26 @@ const test = client.subscribe(
   }
   `
     }
-,(data,e1,e2)=>
+,(arg0,data,arg2)=>
   {
-  console.log(data,e1,e2);
+  console.log(data);
+  }
+);
+
+const test = client.subscribe(
+    {
+  query: `
+  {
+    userSettings {
+      id
+      sendTo
+    }
+  }
+  `
+    }
+,(arg0,data,arg2)=>
+  {
+  console.log(data);
   }
 );
 </script>
